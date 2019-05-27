@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 import Home from "../js/components/Home";
 import About from "../js/components/About";
 import Data from "../js/components/Data";
-import "../sass/app.scss";
 
 Vue.use(VueRouter);
 
@@ -27,6 +26,5 @@ const routes = {
 
 const app = new Vue({
     el: "#app",
-
     router: new VueRouter(routes)
 });

@@ -1,11 +1,10 @@
 <template>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header">Example Component</div>
-
-          <div class="card-body">I'm an example component.</div>
+  <div>
+    <div>
+      <div>
+        <div>
+          <div>Example Component</div>
+          <div>I'm an exampleasdas</div>
         </div>
       </div>
     </div>
@@ -19,3 +18,18 @@ export default {
   }
 };
 </script>
+
+
+<style lang="scss">
+h1,
+h2,
+h3 {
+  font-family: "Roboto", sans-serif;
+}
+p,
+a,
+div,
+li {
+  font-family: "Montserrat", sans-serif;
+}
+</style>
