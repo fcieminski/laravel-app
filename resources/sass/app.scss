@@ -1,8 +1,19 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+h1,
+h2,
+h3 {
+  font-family: "Roboto", sans-serif;
+}
+p,
+a,
+div,
+li {
+  font-family: "Montserrat", sans-serif;
+}
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
