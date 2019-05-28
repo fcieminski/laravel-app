@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  props: ["surveyData"],
   data: {},
   mounted() {
     console.log("Component mounted.");

@@ -14,8 +14,6 @@
 Route::get('/{any?}', function () {
     $projects = \App\Project::all(); 
 
-
-
     $data = [
         'some info',
         'another info',
