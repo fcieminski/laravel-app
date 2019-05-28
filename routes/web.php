@@ -12,5 +12,14 @@
 */
 
 Route::get('/{any?}', function () {
-    return view('welcome');
+    $data = [
+        'some info',
+        'another info',
+        'one more info'
+    ];
+
+    return view('welcome', [
+        'data' => $data
+    ]);
+
 });

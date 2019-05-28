@@ -1,18 +1,12 @@
 <template>
   <div>
-    <div>
-      <div>
-        <div>
-          <div>Example Component</div>
-          <div>I'm an exampleasdas</div>
-        </div>
-      </div>
-    </div>
+    <h2>This is the home page, you can see here some data received from Laravel</h2>
   </div>
 </template>
 
 <script>
 export default {
+  data: {},
   mounted() {
     console.log("Component mounted.");
   }
@@ -21,15 +15,4 @@ export default {
 
 
 <style lang="scss">
-h1,
-h2,
-h3 {
-  font-family: "Roboto", sans-serif;
-}
-p,
-a,
-div,
-li {
-  font-family: "Montserrat", sans-serif;
-}
 </style>

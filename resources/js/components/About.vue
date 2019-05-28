@@ -1,5 +1,7 @@
 <template>
-  <p>About</p>
+  <div>
+    <h2>Template app to learn how Laravel works</h2>
+  </div>
 </template>
 
 

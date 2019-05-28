@@ -1,8 +1,45 @@
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Nunito");
+* {
+  box-sizing: border-box;
+}
 
-// Variables
-@import "variables";
+h1,
+h2,
+h3 {
+  font-family: "Roboto", sans-serif;
+}
+p,
+a,
+div,
+li {
+  font-family: "Montserrat", sans-serif;
+}
 
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
+#app {
+  display: flex;
+}
+a:hover,
+a:active,
+a:focus {
+  outline: 0;
+}
+
+.menu {
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  &__link {
+    margin: 20px;
+    font-size: 1.7rem;
+    color: black;
+    text-decoration: none;
+    &.router-link-exact-active {
+      color: purple;
+    }
+  }
+}
+
+.container {
+  margin-top: 10%;
+  margin-left: 30px;
+}
