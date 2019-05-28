@@ -19,6 +19,9 @@
         @foreach ($data as $data)
             <p>{{ $data }}</p>
         @endforeach
+        @foreach ($projects as $project)
+            <p>{{ $project->title }}</p>
+        @endforeach
     </aside>
     <main class="container">
     <router-view></router-view>

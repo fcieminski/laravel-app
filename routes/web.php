@@ -12,6 +12,10 @@
 */
 
 Route::get('/{any?}', function () {
+    $projects = \App\Project::all(); 
+
+
+
     $data = [
         'some info',
         'another info',
@@ -19,7 +23,8 @@ Route::get('/{any?}', function () {
     ];
 
     return view('welcome', [
-        'data' => $data
+        'data' => $data,
+        'projects' => $projects
     ]);
 
 });
