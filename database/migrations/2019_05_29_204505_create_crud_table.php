@@ -13,7 +13,7 @@ class CreateCrudTable extends Migration
      */
     public function up()
     {
-        Schema::create('crud', function (Blueprint $table) {
+        Schema::create('cruds', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('color');
             $table->text('name');
