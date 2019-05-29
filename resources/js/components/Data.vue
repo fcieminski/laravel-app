@@ -2,21 +2,22 @@
   <div class="container">
     <button @click="create">Add more</button>
     <div class="container__crud">
-      <cruds v-for="crud in cruds" v-bind="crud" :key="crud.id" @update="update" @delete="del"></cruds>
+      <div
+        v-for="crud in cruds"
+        v-bind="crud"
+        :key="crud.id"
+        v-bind:style="{backgroundColor: crud.color}"
+      >
+        <p>{{crud.name}}</p>
+        <p>{{crud.color}}</p>
+        <p>{{crud.id}}</p>
+      </div>
     </div>
   </div>
 </template>
 
 
 <script>
-// function Crud({ id, color, name }) {
-//   this.id = id;
-//   this.color = color;
-//   this.name = name;
-// }
-
-let data = { id: 1, name: "kokojambo", color: "red" };
-
 import Cruds from "./Cruds.vue";
 
 export default {
@@ -25,20 +26,21 @@ export default {
       cruds: []
     };
   },
+  mounted() {
+    fetch("/api/crud")
+      .then(response => response.json())
+      .then(data => {
+        this.cruds = data;
+      });
+  },
   methods: {
-    create(data) {
+    create() {
       fetch("api/crud/create", {
         method: "GET",
-        // body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json"
         }
       }).then(response => console.log(response));
-    },
-    read() {
-      window.axios.get("/api/cruds").then(({ data }) => {
-        console.log(data);
-      });
     },
     update(id, color) {
       // To do

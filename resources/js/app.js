@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../js/components/Home";
 import About from "../js/components/About";
 import Data from "../js/components/Data";
+import Cruds from "../js/components/Cruds";
+Vue.component("cruds", { Cruds });
 
 Vue.use(VueRouter);
 

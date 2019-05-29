@@ -159,16 +159,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-// function Crud({ id, color, name }) {
-//   this.id = id;
-//   this.color = color;
-//   this.name = name;
-// }
-var data = {
-  id: 1,
-  name: "kokojambo",
-  color: "red"
-};
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -176,22 +175,24 @@ var data = {
       cruds: []
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    fetch("/api/crud").then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      _this.cruds = data;
+    });
+  },
   methods: {
-    create: function create(data) {
+    create: function create() {
       fetch("api/crud/create", {
         method: "GET",
-        // body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json"
         }
       }).then(function (response) {
         return console.log(response);
-      });
-    },
-    read: function read() {
-      window.axios.get("/api/cruds").then(function (_ref) {
-        var data = _ref.data;
-        console.log(data);
       });
     },
     update: function update(id, color) {// To do
@@ -791,16 +792,23 @@ var render = function() {
       { staticClass: "container__crud" },
       _vm._l(_vm.cruds, function(crud) {
         return _c(
-          "cruds",
+          "div",
           _vm._b(
-            { key: crud.id, on: { update: _vm.update, delete: _vm.del } },
-            "cruds",
+            { key: crud.id, style: { backgroundColor: crud.color } },
+            "div",
             crud,
             false
-          )
+          ),
+          [
+            _c("p", [_vm._v(_vm._s(crud.name))]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(crud.color))]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(crud.id))])
+          ]
         )
       }),
-      1
+      0
     )
   ])
 }
@@ -15650,11 +15658,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_components_Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../js/components/Home */ "./resources/js/components/Home.vue");
 /* harmony import */ var _js_components_About__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../js/components/About */ "./resources/js/components/About.vue");
 /* harmony import */ var _js_components_Data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../js/components/Data */ "./resources/js/components/Data.vue");
+/* harmony import */ var _js_components_Cruds__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../js/components/Cruds */ "./resources/js/components/Cruds.vue");
 
 
 
 
 
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("cruds", {
+  Cruds: _js_components_Cruds__WEBPACK_IMPORTED_MODULE_5__["default"]
+});
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var routes = {
   mode: "history",
