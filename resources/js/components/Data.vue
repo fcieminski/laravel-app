@@ -1,16 +1,18 @@
 <template>
-  <div class="container">
+  <div>
     <button @click="create">Add more</button>
+    <h2>Amount of Cruds: {{cruds.length}}</h2>
     <div class="container__crud">
       <div
+        class="container__crud-single"
         v-for="crud in cruds"
         v-bind="crud"
         :key="crud.id"
-        v-bind:style="{backgroundColor: crud.color}"
+        :style="{backgroundColor: crud.color}"
       >
-        <p>{{crud.name}}</p>
+        <p>Name: {{crud.name}}</p>
         <p>{{crud.color}}</p>
-        <p>{{crud.id}}</p>
+        <p>id: {{crud.id}}</p>
       </div>
     </div>
   </div>
@@ -40,7 +42,12 @@ export default {
         headers: {
           "Content-Type": "application/json"
         }
-      }).then(response => console.log(response));
+      })
+        .then(() => window.location.reload())
+        .catch(({ message }) => console.log(message));
+    },
+    reload() {
+      window.location.reload;
     },
     update(id, color) {
       // To do

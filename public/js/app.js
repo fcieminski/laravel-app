@@ -168,6 +168,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -191,9 +193,15 @@ __webpack_require__.r(__webpack_exports__);
         headers: {
           "Content-Type": "application/json"
         }
-      }).then(function (response) {
-        return console.log(response);
+      }).then(function () {
+        return window.location.reload();
+      })["catch"](function (_ref) {
+        var message = _ref.message;
+        return console.log(message);
       });
+    },
+    reload: function reload() {
+      window.location.reload;
     },
     update: function update(id, color) {// To do
     },
@@ -784,8 +792,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", [
     _c("button", { on: { click: _vm.create } }, [_vm._v("Add more")]),
+    _vm._v(" "),
+    _c("h2", [_vm._v("Amount of Cruds: " + _vm._s(_vm.cruds.length))]),
     _vm._v(" "),
     _c(
       "div",
@@ -794,17 +804,21 @@ var render = function() {
         return _c(
           "div",
           _vm._b(
-            { key: crud.id, style: { backgroundColor: crud.color } },
+            {
+              key: crud.id,
+              staticClass: "container__crud-single",
+              style: { backgroundColor: crud.color }
+            },
             "div",
             crud,
             false
           ),
           [
-            _c("p", [_vm._v(_vm._s(crud.name))]),
+            _c("p", [_vm._v("Name: " + _vm._s(crud.name))]),
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(crud.color))]),
             _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(crud.id))])
+            _c("p", [_vm._v("id: " + _vm._s(crud.id))])
           ]
         )
       }),
