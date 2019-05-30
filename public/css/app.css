@@ -58,8 +58,17 @@ a:focus {
 .container__crud-single {
   margin-bottom: 5px;
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container__crud-button {
+  background-color: white;
+  border: 1px solid white;
+  color: black;
+  margin-right: 5px;
+  border-radius: 5px;
 }
 

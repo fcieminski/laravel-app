@@ -170,6 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -200,12 +201,17 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(message);
       });
     },
-    reload: function reload() {
-      window.location.reload;
-    },
     update: function update(id, color) {// To do
     },
-    del: function del(id) {// To do
+    del: function del(id) {
+      fetch("api/crud/".concat(id), {
+        method: "DELETE"
+      }).then(function () {
+        return window.location.reload();
+      })["catch"](function (_ref2) {
+        var message = _ref2.message;
+        return console.log(message);
+      });
     }
   },
   component: {
@@ -818,7 +824,21 @@ var render = function() {
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(crud.color))]),
             _vm._v(" "),
-            _c("p", [_vm._v("id: " + _vm._s(crud.id))])
+            _c("p", [_vm._v("id: " + _vm._s(crud.id))]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                key: crud.id,
+                staticClass: "container__crud-button",
+                on: {
+                  click: function($event) {
+                    return _vm.del(crud.id)
+                  }
+                }
+              },
+              [_vm._v("Delete Crud")]
+            )
           ]
         )
       }),
