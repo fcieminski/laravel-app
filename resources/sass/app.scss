@@ -55,12 +55,22 @@ a:focus {
       justify-content: space-between;
       align-items: center;
     }
+    &-buttons {
+      display: flex;
+      flex-direction: column;
+    }
     &-button {
       background-color: white;
       border: 1px solid white;
       color: black;
-      margin-right: 5px;
       border-radius: 5px;
+      margin: 5px;
+
+      &--color {
+        background-color: rgb(117, 117, 117);
+        border: 1px solid rgb(117, 117, 117);
+        color: white;
+      }
     }
   }
 }

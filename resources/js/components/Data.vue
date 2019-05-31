@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="create">Add more</button>
-    <h2>Amount of Cruds: {{cruds.length}}</h2>
+    <h2>Amount of Cruds: {{cruds.length > 0 ? cruds.length : ''}}</h2>
     <div class="container__crud">
       <div
         class="container__crud-single"
@@ -13,7 +13,13 @@
         <p>Name: {{crud.name}}</p>
         <p>{{crud.color}}</p>
         <p>id: {{crud.id}}</p>
-        <button class="container__crud-button" :key="crud.id" @click="del(crud.id)">Delete Crud</button>
+        <div class="container__crud-buttons">
+          <button class="container__crud-button" @click="del(crud.id)">Delete Crud</button>
+          <button
+            class="container__crud-button container__crud-button--color"
+            @click="update(crud.id, crud.color)"
+          >Change color</button>
+        </div>
       </div>
     </div>
   </div>
@@ -21,8 +27,6 @@
 
 
 <script>
-import Cruds from "./Cruds.vue";
-
 export default {
   data() {
     return {
@@ -48,7 +52,15 @@ export default {
         .catch(({ message }) => console.log(message));
     },
     update(id, color) {
-      // To do
+      fetch(`api/crud/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          color: color === "red" ? "green" : "red"
+        })
+      });
     },
     del(id) {
       fetch(`api/crud/${id}`, {
@@ -57,9 +69,6 @@ export default {
         .then(() => window.location.reload())
         .catch(({ message }) => console.log(message));
     }
-  },
-  component: {
-    Cruds
   }
 };
 </script>

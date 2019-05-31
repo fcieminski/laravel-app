@@ -64,11 +64,22 @@ a:focus {
   align-items: center;
 }
 
+.container__crud-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
 .container__crud-button {
   background-color: white;
   border: 1px solid white;
   color: black;
-  margin-right: 5px;
   border-radius: 5px;
+  margin: 5px;
+}
+
+.container__crud-button--color {
+  background-color: #757575;
+  border: 1px solid #757575;
+  color: white;
 }
 

@@ -11,9 +11,9 @@ class CrudController extends Controller
     public function create(Generator $faker)
     {
         $crud = new Crud();
-        $crud -> name = $faker->lexify('???????');
-        $crud-> color = $faker -> boolean ? 'green' : 'red'; 
-        $crud -> save();
+        $crud->name = $faker->lexify('???????');
+        $crud->color = $faker->boolean ? 'green' : 'red'; 
+        $crud->save();
         return response($crud->jsonSerialize(), Response::HTTP_CREATED);
     }
     public function index()
@@ -23,7 +23,7 @@ class CrudController extends Controller
     public function update(Request $request, $id)
     {
         $crud = Crud::findOrFail($id);
-        $crud -> color = $request -> color;
+        $crud->color = $request->color;
         $crud->save();
         return response(null, Response::HTTP_OK);
 
