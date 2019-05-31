@@ -1,6 +1,7 @@
 <template>
   <div>
     <button @click="create">Add more</button>
+    <button v-if="checkedCruds.length > 1" @click="toggleMultiple(checkedCruds)">Toggle few</button>
     <h2>Amount of Cruds: {{cruds.length > 0 ? cruds.length : ''}}</h2>
     <div class="container__crud">
       <div
@@ -19,6 +20,12 @@
             class="container__crud-button container__crud-button--color"
             @click="update(crud.id, crud.color)"
           >Change color</button>
+          <input
+            type="checkbox"
+            :id="crud.id"
+            :value="[crud.id, crud.color]"
+            v-model="checkedCruds"
+          >
         </div>
       </div>
     </div>
@@ -30,7 +37,8 @@
 export default {
   data() {
     return {
-      cruds: []
+      cruds: [],
+      checkedCruds: []
     };
   },
   mounted() {
@@ -60,7 +68,9 @@ export default {
         body: JSON.stringify({
           color: color === "red" ? "green" : "red"
         })
-      });
+      })
+        .then(() => window.location.reload())
+        .catch(({ message }) => console.log(message));
     },
     del(id) {
       fetch(`api/crud/${id}`, {
@@ -68,6 +78,19 @@ export default {
       })
         .then(() => window.location.reload())
         .catch(({ message }) => console.log(message));
+    },
+    toggleMultiple(cruds) {
+      cruds.forEach(element => {
+        fetch(`api/crud/${element[0]}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            color: element[1] === "red" ? "green" : "red"
+          })
+        }).then(() => window.location.reload());
+      });
     }
   }
 };

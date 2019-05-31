@@ -143,10 +143,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      cruds: []
+      cruds: [],
+      checkedCruds: []
     };
   },
   mounted: function mounted() {
@@ -181,6 +189,11 @@ __webpack_require__.r(__webpack_exports__);
         body: JSON.stringify({
           color: color === "red" ? "green" : "red"
         })
+      }).then(function () {
+        return window.location.reload();
+      })["catch"](function (_ref2) {
+        var message = _ref2.message;
+        return console.log(message);
       });
     },
     del: function del(id) {
@@ -188,9 +201,24 @@ __webpack_require__.r(__webpack_exports__);
         method: "DELETE"
       }).then(function () {
         return window.location.reload();
-      })["catch"](function (_ref2) {
-        var message = _ref2.message;
+      })["catch"](function (_ref3) {
+        var message = _ref3.message;
         return console.log(message);
+      });
+    },
+    toggleMultiple: function toggleMultiple(cruds) {
+      cruds.forEach(function (element) {
+        fetch("api/crud/".concat(element[0]), {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            color: element[1] === "red" ? "green" : "red"
+          })
+        }).then(function () {
+          return window.location.reload();
+        });
       });
     }
   }
@@ -742,6 +770,20 @@ var render = function() {
   return _c("div", [
     _c("button", { on: { click: _vm.create } }, [_vm._v("Add more")]),
     _vm._v(" "),
+    _vm.checkedCruds.length > 1
+      ? _c(
+          "button",
+          {
+            on: {
+              click: function($event) {
+                return _vm.toggleMultiple(_vm.checkedCruds)
+              }
+            }
+          },
+          [_vm._v("Toggle few")]
+        )
+      : _vm._e(),
+    _vm._v(" "),
     _c("h2", [
       _vm._v(
         "Amount of Cruds: " +
@@ -798,7 +840,46 @@ var render = function() {
                   }
                 },
                 [_vm._v("Change color")]
-              )
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedCruds,
+                    expression: "checkedCruds"
+                  }
+                ],
+                attrs: { type: "checkbox", id: crud.id },
+                domProps: {
+                  value: [crud.id, crud.color],
+                  checked: Array.isArray(_vm.checkedCruds)
+                    ? _vm._i(_vm.checkedCruds, [crud.id, crud.color]) > -1
+                    : _vm.checkedCruds
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.checkedCruds,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = [crud.id, crud.color],
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.checkedCruds = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.checkedCruds = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.checkedCruds = $$c
+                    }
+                  }
+                }
+              })
             ])
           ]
         )
