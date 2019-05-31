@@ -150,13 +150,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       cruds: [],
-      checkedCruds: []
+      checkedCruds: [],
+      newName: "",
+      editOn: false,
+      editingCrud: ""
     };
   },
+  computed: {},
   mounted: function mounted() {
     var _this = this;
 
@@ -167,6 +177,9 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    editName: function editName(id) {
+      return this.editOn = true, this.editingCrud = id, this.newName = "";
+    },
     create: function create() {
       fetch("api/crud/create", {
         method: "GET",
@@ -220,6 +233,23 @@ __webpack_require__.r(__webpack_exports__);
           return window.location.reload();
         });
       });
+    },
+    sendNewName: function sendNewName(id) {
+      if (this.newName.length < 1) {
+        console.log("more characteerssss");
+      } else {
+        fetch("api/crud/".concat(id), {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name: this.newName
+          })
+        }).then(function () {
+          return window.location.reload();
+        });
+      }
     }
   }
 });
@@ -808,7 +838,49 @@ var render = function() {
             false
           ),
           [
-            _c("p", [_vm._v("Name: " + _vm._s(crud.name))]),
+            _vm.editOn && _vm.editingCrud === crud.id
+              ? _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.newName,
+                      expression: "newName"
+                    }
+                  ],
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.newName },
+                  on: {
+                    keydown: function($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.sendNewName(crud.id)
+                    },
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.newName = $event.target.value
+                    }
+                  }
+                })
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.editName(crud.id)
+                  }
+                }
+              },
+              [_vm._v("Name: " + _vm._s(crud.name))]
+            ),
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(crud.color))]),
             _vm._v(" "),

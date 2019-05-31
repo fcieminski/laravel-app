@@ -11,7 +11,13 @@
         :key="crud.id"
         :style="{backgroundColor: crud.color}"
       >
-        <p>Name: {{crud.name}}</p>
+        <input
+          v-if="editOn && editingCrud === crud.id"
+          type="text"
+          v-model="newName"
+          @keydown.enter="sendNewName(crud.id)"
+        >
+        <p v-on:click="editName(crud.id)">Name: {{crud.name}}</p>
         <p>{{crud.color}}</p>
         <p>id: {{crud.id}}</p>
         <div class="container__crud-buttons">
@@ -38,9 +44,13 @@ export default {
   data() {
     return {
       cruds: [],
-      checkedCruds: []
+      checkedCruds: [],
+      newName: "",
+      editOn: false,
+      editingCrud: ""
     };
   },
+  computed: {},
   mounted() {
     fetch("/api/crud")
       .then(response => response.json())
@@ -49,6 +59,9 @@ export default {
       });
   },
   methods: {
+    editName(id) {
+      return (this.editOn = true), (this.editingCrud = id), (this.newName = "");
+    },
     create() {
       fetch("api/crud/create", {
         method: "GET",
@@ -91,6 +104,21 @@ export default {
           })
         }).then(() => window.location.reload());
       });
+    },
+    sendNewName(id) {
+      if (this.newName.length < 1) {
+        console.log("more characteerssss");
+      } else {
+        fetch(`api/crud/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name: this.newName
+          })
+        }).then(() => window.location.reload());
+      }
     }
   }
 };

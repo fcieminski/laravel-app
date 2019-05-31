@@ -23,8 +23,14 @@ class CrudController extends Controller
     public function update(Request $request, $id)
     {
         $crud = Crud::findOrFail($id);
-        $crud->color = $request->color;
-        $crud->save();
+        if($request->color){
+            $crud->color = $request->color;
+            $crud->save();
+        }
+        if($request->name){
+            $crud->name = $request->name;
+            $crud->save();
+        }
         return response(null, Response::HTTP_OK);
 
     }
